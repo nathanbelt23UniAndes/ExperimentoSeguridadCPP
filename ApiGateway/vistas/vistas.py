@@ -10,7 +10,7 @@ def login():
     username = request.json.get('username')
     password = request.json.get('password')
     # Enviar solicitud al servicio de autenticación
-    auth_response = requests.post(os.getenv("AUTH_SERVICE_URL"), json={'username': username, 'password': password})
+    auth_response = requests.post(os.getenv("AUTH_SERVICE_URL"), json={'usuario': username, 'contrasena': password})
     # Si la autenticación es exitosa, devolver el token
     if auth_response.status_code == 200:
         token = auth_response.json()['token']
