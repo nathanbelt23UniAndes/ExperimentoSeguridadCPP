@@ -15,8 +15,7 @@ def login():
     if auth_response.status_code == 200:
         token = auth_response.json()['token']
         id = auth_response.json()['id']
-        rol = auth_response.json()['rol']
-        return jsonify({'token': token,'id': id ,'rol' : rol}), 200
+        return jsonify({'token': token,'id': id}), 200
     else:
         return jsonify({'mensaje': 'Credenciales inválidas'}), 401
 
