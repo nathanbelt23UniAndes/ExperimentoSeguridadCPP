@@ -35,6 +35,7 @@ class VistaSignIn(Resource):
         return '', 204
 
 
+
 class VistaLogIn(Resource):
     def post(self):
         contrasena_encriptada = hashlib.md5(
