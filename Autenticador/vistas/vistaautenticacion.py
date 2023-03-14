@@ -40,7 +40,6 @@ class VistaLogIn(Resource):
             request.json["contrasena"].encode('utf-8')).hexdigest()
         usuario = Usuario.query.filter(Usuario.usuario == request.json["usuario"],
                                        Usuario.contrasena == contrasena_encriptada).first()
-        db.session.commit()
         if usuario is None:
             return "El usuario no existe", 404
         else:
