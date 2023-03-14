@@ -5,6 +5,7 @@ from flask_restful import Api
 import hashlib
 from modelos import db,  Usuario, Roles
 from vistas.vistaautenticacion import *
+from vistas.vista_autorizador import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbapp.sqlite'
@@ -23,6 +24,8 @@ cors = CORS(app)
 api = Api(app)
 api.add_resource(VistaSignIn, '/signin')
 api.add_resource(VistaLogIn, '/login')
+api.add_resource(vistaAutorizador, '/autorizador')
+
 
 
 jwt = JWTManager(app)
