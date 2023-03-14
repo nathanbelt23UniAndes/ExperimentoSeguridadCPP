@@ -35,7 +35,11 @@ with app.app_context():
             contrasena.encode('utf-8')).hexdigest()
         u = Usuario(usuario="vendedor", contrasena=contrasena_encriptada,
                     rol=Roles.VENDEDOR)
+        u2= Usuario(usuario="vendedor2", contrasena=contrasena_encriptada,
+                    rol=Roles.VENDEDOR)
         db.session.add(u)
+        db.session.add(u2)
+
         db.session.commit()
     comprador = Usuario.query.filter(Usuario.usuario == "comprador").all()
     if len(admin) == 0:

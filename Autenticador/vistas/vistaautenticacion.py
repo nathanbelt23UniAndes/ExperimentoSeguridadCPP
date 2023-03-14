@@ -34,6 +34,7 @@ class VistaSignIn(Resource):
         db.session.commit()
         return '', 204
 
+
 class VistaLogIn(Resource):
     def post(self):
         contrasena_encriptada = hashlib.md5(
@@ -44,4 +45,5 @@ class VistaLogIn(Resource):
             return "El usuario no existe", 404
         else:
             token_de_acceso = create_access_token(identity=usuario.id)
-            return {"mensaje": "Inicio de sesión exitoso", "token": token_de_acceso, "id": usuario.id, "rol": usuario.rol}
+            return {"mensaje": "Inicio de sesión exitoso", "token": token_de_acceso, "id": usuario.id}
+
