@@ -37,6 +37,14 @@ def solicitud():
             usuario = auth_response.json()['usuario']
             rol = auth_response.json()['rol']
             # Devolver información del usuario y sus permisos
-            return jsonify({'id': id_usuario,'usuario': usuario, 'rol': rol}), 200
+            endpoint_ventas = os.getenv("VENTAS_API")
+            ventas_response = requests.get(f'{endpoint_ventas}/{id_usuario}/{rol}')
+            data = ""
+            if ventas_response is not None:
+                 data = ventas_response.json()
+            if ventas_response.status_code == 200:
+                return jsonify(data)
+            else:
+                 return jsonify(data)
     else:
         return jsonify({'mensaje': 'Token inválido'}), 401
