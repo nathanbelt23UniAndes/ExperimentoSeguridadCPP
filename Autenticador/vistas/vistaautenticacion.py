@@ -1,4 +1,4 @@
-from flask_jwt_extended import  jwt_required,create_access_token
+from flask_jwt_extended import  create_access_token
 from flask import request
 import hashlib
 from flask_restful import Resource
@@ -35,7 +35,6 @@ class VistaSignIn(Resource):
         return '', 204
 
 class VistaLogIn(Resource):
-    @jwt_required()
     def post(self):
         contrasena_encriptada = hashlib.md5(
             request.json["contrasena"].encode('utf-8')).hexdigest()
