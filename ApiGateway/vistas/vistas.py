@@ -1,5 +1,6 @@
 from flask import request, jsonify
 import requests
+import json
 from app import app
 import os
 
@@ -28,7 +29,7 @@ def solicitud():
     if not token:
         return jsonify({'mensaje': 'No se proporcionó un token de acceso'}), 401
     # Enviar solicitud al servicio de autorización para validar el token
-    headers = {'Content-Type': 'application/json', "Authorization": f"Bearer {token}"}
+    headers = {'Content-Type': 'application/json', "Authorization": f"{token}"}
     auth_response = requests.get(os.getenv("AUTHZ_SERVICE_URL"), headers = headers)
     # Si el token es válido, continuar con la solicitud
     if auth_response.status_code == 200:
