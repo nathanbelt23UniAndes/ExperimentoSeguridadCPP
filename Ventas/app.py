@@ -23,7 +23,7 @@ db.init_app(app)
 db.create_all()
 cors = CORS(app)
 api = Api(app)
-api.add_resource(VistaVentas, '/ventas/<int:vendedor>')
+api.add_resource(VistaVentas, '/ventas/<int:vendedor>/<int:rol>')
 api.add_resource(VistaCreaVentas, '/crea-venta')
 
 
@@ -47,12 +47,12 @@ with app.app_context():
     if (len(db.session.query(Venta).all())==0):
         i=0
         while i< 50:
-            crearVentaTest(7,8)
-            crearVentaTest(7, 9)
-            crearVentaTest(7, 10)
-            crearVentaTest(8, 8)
-            crearVentaTest(8, 9)
-            crearVentaTest(8, 10)
+            crearVentaTest(1,8)
+            crearVentaTest(1, 9)
+            crearVentaTest(1, 10)
+            crearVentaTest(2, 8)
+            crearVentaTest(2, 9)
+            crearVentaTest(2, 10)
             i=i+1
 
 
