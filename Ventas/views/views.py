@@ -15,10 +15,13 @@ logVentaSchema = LogVentaSchema()
 
 
 class VistaVentas(Resource):
-    def get(self, vendedor):
-        resultado_ventas = Venta.query.filter(
-            Venta.idVendedor == vendedor).all()
-        return [ventaSchema.dump(item) for item in resultado_ventas]
+    def get(self, vendedor, rol):
+        if(rol==1):
+            resultado_ventas = Venta.query.filter(
+                Venta.idVendedor == vendedor).all()
+            return [ventaSchema.dump(item) for item in resultado_ventas]
+        else:
+            return  'Esta arrecho mano, usted no puede entrar', 403
 
 
 class VistaCreaVentas(Resource):

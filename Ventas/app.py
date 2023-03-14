@@ -23,7 +23,7 @@ db.init_app(app)
 db.create_all()
 cors = CORS(app)
 api = Api(app)
-api.add_resource(VistaVentas, '/ventas/<int:vendedor>')
+api.add_resource(VistaVentas, '/ventas/<int:vendedor>/<int:rol>')
 api.add_resource(VistaCreaVentas, '/crea-venta')
 
 
