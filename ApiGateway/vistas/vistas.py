@@ -28,21 +28,15 @@ def solicitud():
     # Si no se envió token, devolver error de autenticación
     if not token:
         return jsonify({'mensaje': 'No se proporcionó un token de acceso'}), 401
-    # Enviar solicitud al servicio de autenticación para validar el token
-    auth_response = requests.post(os.getenv("AUTH_SERVICE_URL"), json={'token': token})
+    # Enviar solicitud al servicio de autorización para validar el token
+    headers = {'Content-Type': 'application/json', "Authorization": f"Bearer {token}"}
+    auth_response = requests.get(os.getenv("AUTHZ_SERVICE_URL"), headers = headers)
     # Si el token es válido, continuar con la solicitud
     if auth_response.status_code == 200:
-        # Enviar solicitud al servicio de autorización
-        authz_response = requests.post(os.getenv("AUTHZ_SERVICE_URL"), json={'token': token})
-        # Si la autorización es exitosa, continuar con la solicitud
-        if authz_response.status_code == 200:
-            # Obtener información del usuario y sus permisos desde la respuesta de autorización
-            usuario = authz_response.json()['usuario']
-            rol = authz_response.json()['rol']
-            permisos = authz_response.json()['permisos']
+            id_usuario = auth_response.json()['id']
+            usuario = auth_response.json()['usuario']
+            rol = auth_response.json()['rol']
             # Devolver información del usuario y sus permisos
-            return jsonify({'usuario': usuario, 'rol': rol, 'permisos': permisos}), 200
-        else:
-            return jsonify({'mensaje': 'No se pudo obtener la información de autorización'}), 403
+            return jsonify({'id': id_usuario,'usuario': usuario, 'rol': rol}), 200
     else:
         return jsonify({'mensaje': 'Token inválido'}), 401
