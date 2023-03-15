@@ -42,6 +42,6 @@ def solicitud():
             data = ""
             if ventas_response is not None:
                  data = ventas_response.json()
-            return jsonify(data)
+            return jsonify(data), ventas_response.status_code
     else:
         return jsonify({'mensaje': 'Token inválido'}), 401
