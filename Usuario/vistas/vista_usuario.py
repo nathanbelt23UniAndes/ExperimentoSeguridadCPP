@@ -2,8 +2,10 @@ from flask_jwt_extended import  create_access_token
 from flask import request, jsonify
 import json
 import hashlib
+from datetime import datetime
 from flask_restful import Resource
 import requests
+from modelos.modelos import db, LogUsuario
 
 
 
@@ -49,8 +51,10 @@ class vista_Generar_Peticiones(Resource):
                 headers = {'Content-Type': 'application/json', "Authorization": f"Bearer {token}"}
                 response_solicitud = requests.get(f'{API_BASE_URL}/solicitud', headers = headers)
                 # response_new = response_solicitud.json()
-                
-      
+                logusuario= LogUsuario (fechaTransaccion=datetime.now(),usuario=str(usuario), error=0, mensaje= "mensaje")
+                db.session.add(logusuario)
+                db.session.commit()
+            
             else:
                 print(jsonify({'mensaje': 'Credenciales inválidas'}))
 
