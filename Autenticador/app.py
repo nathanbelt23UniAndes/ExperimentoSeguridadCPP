@@ -29,30 +29,82 @@ api.add_resource(vistaAutorizador, '/autorizador')
 
 
 jwt = JWTManager(app)
-
 with app.app_context():
-    admin = Usuario.query.filter(Usuario.usuario == "vendedor").all()
-    if len(admin) == 0:
-        contrasena = 'vendedor'
-        contrasena_encriptada = hashlib.md5(
-            contrasena.encode('utf-8')).hexdigest()
-        u = Usuario(usuario="vendedor", contrasena=contrasena_encriptada,
-                    rol=Roles.VENDEDOR)
-        u2= Usuario(usuario="vendedor2", contrasena=contrasena_encriptada,
-                    rol=Roles.VENDEDOR)
-        db.session.add(u)
-        db.session.add(u2)
+    usuarios = Usuario.query.all()
+    if len(usuarios)==0:
 
+        for i in range(25):
+            nombre_usuario = f"vendedor{i}"
+            rol_usuario = Roles.VENDEDOR
+            contrasena_usuario=nombre_usuario
+            contrasena_encriptada = hashlib.md5(contrasena_usuario.encode('utf-8')).hexdigest()
+            usuario = Usuario(
+                usuario=nombre_usuario,
+                contrasena= contrasena_encriptada,
+                rol=rol_usuario)
+            db.session.add(usuario)
         db.session.commit()
-    comprador = Usuario.query.filter(Usuario.usuario == "comprador").all()
-    if len(admin) == 0:
-        contrasena = 'comprador'
-        contrasena_encriptada = hashlib.md5(
-            contrasena.encode('utf-8')).hexdigest()
-        e = Usuario(usuario="comprador",
-                    contrasena=contrasena_encriptada, rol=Roles.COMPRADOR)
-        db.session.add(e)
+        
+
+        for i in range(25,51):
+            nombre_comprador = f"comprador{i}"
+            rol_comprador = Roles.COMPRADOR
+            contrasena_usuario=nombre_usuario
+            contrasena_encriptada = hashlib.md5(contrasena_usuario.encode('utf-8')).hexdigest()
+            usuario = Usuario(
+                usuario=nombre_comprador,
+                contrasena= contrasena_encriptada,
+                rol=rol_comprador)
+            db.session.add(usuario)
         db.session.commit()
+
+
+        for i in range(51,76):
+            nombre_admin = f"admin{i}"
+            rol_admin = Roles.ADMINISTRADOR
+            contrasena_usuario=nombre_usuario
+            contrasena_encriptada = hashlib.md5(contrasena_usuario.encode('utf-8')).hexdigest()
+            usuario = Usuario(
+                usuario=nombre_admin,
+                contrasena= contrasena_encriptada,
+                rol=rol_admin)
+            db.session.add(usuario)
+        db.session.commit()
+
+
+        for i in range(76,101):
+            nombre_conductor = f"conductor{i}"
+            rol_conductor = Roles.CONDUCTOR
+            contrasena_usuario=nombre_usuario
+            contrasena_encriptada = hashlib.md5(contrasena_usuario.encode('utf-8')).hexdigest()
+            usuario = Usuario(
+                usuario=nombre_conductor,
+                contrasena= contrasena_encriptada,
+                rol=rol_conductor)
+            db.session.add(usuario)
+        db.session.commit()
+    #     admin = Usuario.query.filter(Usuario.usuario == "vendedor").all()
+    #     if len(admin) == 0:
+    #         contrasena = 'vendedor'
+    #         contrasena_encriptada = hashlib.md5(
+    #             contrasena.encode('utf-8')).hexdigest()
+    #         u = Usuario(usuario="vendedor", contrasena=contrasena_encriptada,
+    #                     rol=Roles.VENDEDOR)
+    #         u2= Usuario(usuario="vendedor2", contrasena=contrasena_encriptada,
+    #                     rol=Roles.VENDEDOR)
+    #         db.session.add(u)
+    #         db.session.add(u2)
+
+    #         db.session.commit()
+        # comprador = Usuario.query.filter(Usuario.usuario == "comprador").all()
+        # if len(admin) == 0:
+        #     contrasena = 'comprador'
+        #     contrasena_encriptada = hashlib.md5(
+        #         contrasena.encode('utf-8')).hexdigest()
+        #     e = Usuario(usuario="comprador",
+        #                 contrasena=contrasena_encriptada, rol=Roles.COMPRADOR)
+        #     db.session.add(e)
+        #     db.session.commit()
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

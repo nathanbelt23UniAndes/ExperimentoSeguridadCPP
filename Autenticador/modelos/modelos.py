@@ -9,7 +9,7 @@ class Roles(IntEnum):
     VENDEDOR  = 1
     COMPRADOR  = 2
     ADMINISTRADOR  = 3
-    REPARTIDOR = 4
+    CONDUCTOR = 4
     
     @staticmethod
     def fetch_values():

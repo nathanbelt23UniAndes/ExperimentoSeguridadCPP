@@ -5,7 +5,7 @@ from flask_cors import CORS
 from flask_restful import Api
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from vistas.vista_usuario import vistaUsuario
+from vistas.vista_usuario import vistaUsuario, vista_Generar_Peticiones
 
 import os
 
@@ -25,6 +25,7 @@ cors = CORS(app)
 api = Api(app)
 
 api.add_resource(vistaUsuario , '/usuario' )
+api.add_resource(vista_Generar_Peticiones , '/peticiones' )
 
 
 
