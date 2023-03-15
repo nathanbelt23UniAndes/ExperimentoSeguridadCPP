@@ -18,11 +18,12 @@ class Venta(db.Model):
 
 
 class LogVenta(db.Model):
-    __tablename__ = 'log_producto'
+    __tablename__ = 'log_Venta'
     id = db.Column(db.Integer, primary_key=True)
     idVenta = db.Column(db.Integer())
     fechaTransaccion = db.Column(db.DateTime(), default=datetime.now())
     idVendedor = db.Column(db.Integer)
+    error = db.Column(db.Integer)
 
 
 class VentaSchema(SQLAlchemyAutoSchema):

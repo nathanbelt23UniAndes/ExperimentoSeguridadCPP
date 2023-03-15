@@ -25,11 +25,11 @@ cors = CORS(app)
 api = Api(app)
 api.add_resource(VistaVentas, '/ventas/<int:vendedor>/<int:rol>')
 api.add_resource(VistaCreaVentas, '/crea-venta')
-
+data_factory = Faker()
 
 
 def crearVentaTest(idVendedor, idCliente):
-    data_factory = Faker()
+  
     v = Venta(producto=data_factory.word(),
               cantidad=data_factory.random_number(),
               precioTotal=data_factory.random_number(),
@@ -45,14 +45,13 @@ with app.app_context():
     db.session.commit()
 
     if (len(db.session.query(Venta).all())==0):
-        i=0
-        while i< 50:
-            crearVentaTest(1,8)
-            crearVentaTest(1, 9)
-            crearVentaTest(1, 10)
-            crearVentaTest(2, 8)
-            crearVentaTest(2, 9)
-            crearVentaTest(2, 10)
+        i=1
+        while i< 26:
+            crearVentaTest(i,data_factory.random_number())
+            crearVentaTest(i, data_factory.random_number())
+            crearVentaTest(i, data_factory.random_number())
+            crearVentaTest(i, data_factory.random_number())
+            crearVentaTest(i, data_factory.random_number())
             i=i+1
 
 
