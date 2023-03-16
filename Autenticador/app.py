@@ -49,7 +49,7 @@ with app.app_context():
         for i in range(25,51):
             nombre_comprador = f"comprador{i}"
             rol_comprador = Roles.COMPRADOR
-            contrasena_usuario=nombre_usuario
+            contrasena_usuario = nombre_comprador
             contrasena_encriptada = hashlib.md5(contrasena_usuario.encode('utf-8')).hexdigest()
             usuario = Usuario(
                 usuario=nombre_comprador,
@@ -62,7 +62,7 @@ with app.app_context():
         for i in range(51,76):
             nombre_admin = f"admin{i}"
             rol_admin = Roles.ADMINISTRADOR
-            contrasena_usuario=nombre_usuario
+            contrasena_usuario = nombre_admin
             contrasena_encriptada = hashlib.md5(contrasena_usuario.encode('utf-8')).hexdigest()
             usuario = Usuario(
                 usuario=nombre_admin,
@@ -75,7 +75,7 @@ with app.app_context():
         for i in range(76,101):
             nombre_conductor = f"conductor{i}"
             rol_conductor = Roles.CONDUCTOR
-            contrasena_usuario=nombre_usuario
+            contrasena_usuario = nombre_conductor
             contrasena_encriptada = hashlib.md5(contrasena_usuario.encode('utf-8')).hexdigest()
             usuario = Usuario(
                 usuario=nombre_conductor,
